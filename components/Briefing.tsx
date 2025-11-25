@@ -166,6 +166,15 @@ const Briefing: React.FC<BriefingProps> = ({ onBack }) => {
         console.error('Erro ao enviar briefing:', error);
         alert("Ocorreu um erro ao enviar o briefing. Por favor, tente novamente.");
       } else {
+        // Tenta enviar a notificação por e-mail (não bloqueia o sucesso do usuário se falhar)
+        try {
+          await supabase.functions.invoke('send-briefing-notification', {
+            body: { record: data }
+          });
+        } catch (notifyError) {
+          console.error('Erro ao enviar notificação:', notifyError);
+        }
+
         setIsSent(true);
       }
     } catch (err) {

@@ -6,7 +6,7 @@ const services = [
     symbol: "✦",
     title: "Shows e Eventos",
     description: "Cenas que acontecem uma vez. Meu trabalho é fazer com que elas durem para sempre — com estética, técnica e intensidade.",
-    image: "https://picsum.photos/600/800?random=1"
+    image: "/shows-eventos.jpg"
   },
   {
     symbol: "●",
@@ -32,7 +32,7 @@ const Services: React.FC = () => {
   return (
     <section id="atuacao" className="py-32 px-6 bg-neutral-950 text-neutral-100">
       <div className="max-w-screen-2xl mx-auto">
-        
+
         {/* Section Header */}
         <div className="mb-24 flex flex-col items-center text-center">
           <span className="text-neutral-500 uppercase tracking-[0.3em] text-[10px] mb-4 block">
@@ -59,8 +59,8 @@ const Services: React.FC = () => {
               {/* Image Container */}
               <div className="relative w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-8 border border-neutral-900 group-hover:border-neutral-800 transition-colors duration-500">
                 <div className="absolute inset-0 bg-neutral-800 animate-pulse" /> {/* Placeholder loading skeleton */}
-                <img 
-                  src={service.image} 
+                <img
+                  src={service.image}
                   alt={service.title}
                   loading="lazy"
                   className="relative z-10 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:saturate-100 grayscale opacity-90 group-hover:opacity-100"
@@ -68,10 +68,10 @@ const Services: React.FC = () => {
                 {/* Subtle overlay that lifts on hover */}
                 <div className="absolute inset-0 bg-neutral-950/20 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none"></div>
               </div>
-              
+
               {/* Content Container */}
               <div className="flex flex-col flex-grow items-center text-center px-2">
-                
+
                 {/* Minimalist Symbol */}
                 <span className="text-neutral-500 text-lg mb-4 opacity-60 group-hover:opacity-100 group-hover:text-white transition-all duration-500 transform group-hover:-translate-y-1">
                   {service.symbol}

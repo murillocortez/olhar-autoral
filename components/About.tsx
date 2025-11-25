@@ -5,36 +5,36 @@ import Logo from './Logo';
 const About: React.FC = () => {
   return (
     <section id="sobre" className="relative py-24 md:py-40 bg-neutral-950 text-neutral-200 overflow-hidden">
-      
+
       {/* Decorative Background Element */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-neutral-900/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          
+
           {/* Left Column: Image (Horizontal/Cinematic Portrait) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
-              <img 
-                src="https://picsum.photos/id/1005/1200/900?grayscale" 
-                alt="Murillo Cortez Portrait" 
-                className="w-full h-full object-cover filter grayscale contrast-110 hover:grayscale-0 transition-all duration-1000 ease-in-out"
+            <div className="relative aspect-[3/4] overflow-hidden rounded-sm">
+              <img
+                src="/murillo-cortez.jpg"
+                alt="Murillo Cortez Portrait"
+                className="w-full h-full object-cover object-top filter grayscale contrast-110 hover:grayscale-0 transition-all duration-1000 ease-in-out"
               />
               {/* Cinematic Grain Overlay effect */}
               <div className="absolute inset-0 bg-neutral-950/10 pointer-events-none mix-blend-multiply" />
-              
+
               {/* Digital Watermark Overlay on the photo */}
               <div className="absolute bottom-4 right-4 z-20">
                 <Logo variant="watermark" />
               </div>
             </div>
-            
+
             {/* Minimalist Caption under photo */}
             <div className="flex items-center gap-4 mt-4">
               <div className="h-px w-12 bg-neutral-800" />
@@ -44,10 +44,10 @@ const About: React.FC = () => {
 
           {/* Right Column: Narrative */}
           <div className="order-1 lg:order-2">
-            
+
             {/* Header Structure */}
             <div className="mb-10">
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -55,9 +55,9 @@ const About: React.FC = () => {
               >
                 O Salto Quântico
               </motion.span>
-              
+
               <div className="flex items-center gap-6">
-                <motion.h2 
+                <motion.h2
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -67,7 +67,7 @@ const About: React.FC = () => {
                   Sobre Mim
                 </motion.h2>
                 {/* Graphic Divider */}
-                <motion.div 
+                <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: 60 }}
                   viewport={{ once: true }}
@@ -98,7 +98,7 @@ const About: React.FC = () => {
               >
                 {/* Subtle paper texture effect via overlay */}
                 <div className="absolute inset-0 bg-white/[0.02] mix-blend-overlay pointer-events-none" />
-                
+
                 <p className="relative z-10 font-serif italic text-2xl md:text-3xl text-neutral-100 leading-snug">
                   "Foram 9 anos segurando a câmera, mas só agora tive coragem de segurar o meu próprio destino."
                 </p>
@@ -121,9 +121,9 @@ const About: React.FC = () => {
               >
                 Hoje, o <strong>Olhar Autoral</strong> é a minha identidade criativa. É um compromisso comigo mesmo: fazer da fotografia a minha profissão, minha jornada e meu legado. E cada clique daqui pra frente carrega algo que nunca mais vou abrir mão: <span className="text-white border-b border-white/20 pb-0.5">a verdade do meu olhar.</span>
               </motion.p>
-              
+
               {/* Brand Signature */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}

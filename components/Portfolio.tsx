@@ -22,14 +22,30 @@ interface PortfolioItem {
 
 const portfolioData: PortfolioItem[] = [
   { id: 1, src: "https://picsum.photos/800/1200?random=101", category: "Editorial", title: "Silêncio Urbano", aspectRatio: "aspect-[2/3]", palette: 'sageGreen' },
-  { id: 2, src: "https://picsum.photos/1200/800?random=102", category: "Shows", title: "Luz e Som", aspectRatio: "aspect-[3/2]", palette: 'deepBlue' },
+  { id: 20, src: "/projeto%20social/1.jpg", category: "Projeto Social", title: "Essência", aspectRatio: "aspect-[3/4]", palette: 'terracotta' },
+  { id: 10, src: "/show/1.jpg", category: "Shows", title: "Performance", aspectRatio: "aspect-[2/3]", palette: 'deepBlue' },
+  { id: 21, src: "/projeto%20social/2.jpg", category: "Projeto Social", title: "Olhar", aspectRatio: "aspect-[3/2]", palette: 'burntGold' },
   { id: 3, src: "https://picsum.photos/800/800?random=103", category: "Retrato", title: "Essência", aspectRatio: "aspect-square", palette: 'terracotta' },
+  { id: 11, src: "/show/2.jpg", category: "Shows", title: "Luz e Som", aspectRatio: "aspect-[3/2]", palette: 'deepBlue' },
+  { id: 22, src: "/projeto%20social/3.jpg", category: "Projeto Social", title: "Silêncio Urbano", aspectRatio: "aspect-square", palette: 'sageGreen' },
   { id: 4, src: "https://picsum.photos/800/1000?random=104", category: "Moda", title: "Texturas", aspectRatio: "aspect-[4/5]", palette: 'burntGold' },
+  { id: 12, src: "/show/3.jpg", category: "Shows", title: "Energia", aspectRatio: "aspect-square", palette: 'terracotta' },
+  { id: 23, src: "/projeto%20social/4.jpg", category: "Projeto Social", title: "Frame", aspectRatio: "aspect-[4/5]", palette: 'deepBlue' },
   { id: 5, src: "https://picsum.photos/800/600?random=105", category: "Gastronomia", title: "Paladar Visual", aspectRatio: "aspect-[4/3]", palette: 'terracotta' },
+  { id: 13, src: "/show/4.jpg", category: "Shows", title: "Vibração", aspectRatio: "aspect-[4/5]", palette: 'burntGold' },
+  { id: 24, src: "/projeto%20social/5.jpg", category: "Projeto Social", title: "Autoral", aspectRatio: "aspect-[3/4]", palette: 'sageGreen' },
   { id: 6, src: "https://picsum.photos/800/1200?random=106", category: "Autoral", title: "Fragmentos", aspectRatio: "aspect-[2/3]", palette: 'sageGreen' },
+  { id: 14, src: "/show/5.jpg", category: "Shows", title: "Atmosfera", aspectRatio: "aspect-[4/3]", palette: 'sageGreen' },
+  { id: 25, src: "/projeto%20social/6.jpg", category: "Projeto Social", title: "Resiliência", aspectRatio: "aspect-[2/3]", palette: 'terracotta' },
   { id: 7, src: "https://picsum.photos/900/900?random=107", category: "Retrato", title: "Olhar", aspectRatio: "aspect-square", palette: 'burntGold' },
-  { id: 8, src: "https://picsum.photos/1200/800?random=108", category: "Eventos", title: "Movimento", aspectRatio: "aspect-[3/2]", palette: 'deepBlue' },
+  { id: 15, src: "/show/6.jpg", category: "Shows", title: "Palco", aspectRatio: "aspect-[2/3]", palette: 'deepBlue' },
+  { id: 26, src: "/projeto%20social/7.jpg", category: "Projeto Social", title: "Humanidade", aspectRatio: "aspect-square", palette: 'sageGreen' },
+  { id: 16, src: "/show/7.jpg", category: "Shows", title: "Contraste", aspectRatio: "aspect-square", palette: 'burntGold' },
+  { id: 27, src: "/projeto%20social/8.jpg", category: "Projeto Social", title: "Verdade", aspectRatio: "aspect-[3/2]", palette: 'deepBlue' },
   { id: 9, src: "https://picsum.photos/800/1100?random=109", category: "Autoral", title: "Sombras", aspectRatio: "aspect-[3/4]", palette: 'sageGreen' },
+  { id: 17, src: "/show/8.jpg", category: "Shows", title: "Melodia", aspectRatio: "aspect-[3/2]", palette: 'terracotta' },
+  { id: 28, src: "/projeto%20social/9.jpg", category: "Projeto Social", title: "Identidade", aspectRatio: "aspect-[4/5]", palette: 'burntGold' },
+  { id: 29, src: "/projeto%20social/10.jpg", category: "Projeto Social", title: "Alma", aspectRatio: "aspect-[4/3]", palette: 'terracotta' },
 ];
 
 const Portfolio: React.FC = () => {
@@ -59,23 +75,23 @@ const Portfolio: React.FC = () => {
 
   return (
     <section id="portfolio" className="py-32 bg-neutral-950 text-neutral-100 relative z-10 overflow-hidden transition-colors duration-1000">
-      
+
       {/* AMBIENT LIGHT: Dynamic Background Glow */}
-      <motion.div 
-        animate={{ 
-          background: `radial-gradient(circle at 50% 30%, ${PALETTES[activePalette].glow} 0%, transparent 60%)` 
+      <motion.div
+        animate={{
+          background: `radial-gradient(circle at 50% 30%, ${PALETTES[activePalette].glow} 0%, transparent 60%)`
         }}
         transition={{ duration: 1.2, ease: "easeInOut" }}
         className="absolute inset-0 pointer-events-none z-0"
       />
 
       <div className="max-w-screen-2xl mx-auto px-6 relative z-10">
-        
+
         {/* Header with Dynamic Accent */}
         <div className="mb-20 flex flex-col items-start border-l-2 pl-8 transition-colors duration-700"
-             style={{ borderColor: activePalette === 'neutral' ? '#262626' : PALETTES[activePalette].accent }}>
-          
-          <motion.span 
+          style={{ borderColor: activePalette === 'neutral' ? '#262626' : PALETTES[activePalette].accent }}>
+
+          <motion.span
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -84,8 +100,8 @@ const Portfolio: React.FC = () => {
           >
             Galeria Selecionada
           </motion.span>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -94,8 +110,8 @@ const Portfolio: React.FC = () => {
           >
             Portfólio
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -109,13 +125,13 @@ const Portfolio: React.FC = () => {
         {/* Masonry Layout */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
           {portfolioData.map((item) => (
-            <PortfolioItemCard 
-              key={item.id} 
-              item={item} 
+            <PortfolioItemCard
+              key={item.id}
+              item={item}
               activePalette={activePalette}
               onHover={() => setActivePalette(item.palette)}
               onLeave={() => setActivePalette('neutral')}
-              onClick={() => setSelectedId(item.id)} 
+              onClick={() => setSelectedId(item.id)}
             />
           ))}
         </div>
@@ -140,21 +156,21 @@ const Portfolio: React.FC = () => {
             className="fixed inset-0 z-[60] bg-black flex items-center justify-center backdrop-blur-3xl"
             onClick={() => setSelectedId(null)}
           >
-            <button 
+            <button
               className="absolute top-8 right-8 text-neutral-400 hover:text-white transition-colors z-[70] p-2"
               onClick={() => setSelectedId(null)}
             >
               <X size={32} strokeWidth={1} />
             </button>
 
-            <button 
+            <button
               className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white transition-colors z-[70] p-4 hidden md:block"
               onClick={(e) => { e.stopPropagation(); navigate(-1); }}
             >
               <ChevronLeft size={48} strokeWidth={0.5} />
             </button>
-            
-            <button 
+
+            <button
               className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white transition-colors z-[70] p-4 hidden md:block"
               onClick={(e) => { e.stopPropagation(); navigate(1); }}
             >
@@ -170,14 +186,14 @@ const Portfolio: React.FC = () => {
               className="relative max-w-[90vw] max-h-[90vh] overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <img 
-                src={selectedItem.src} 
-                alt={selectedItem.title} 
+              <img
+                src={selectedItem.src}
+                alt={selectedItem.title}
                 className="max-w-full max-h-[90vh] object-contain shadow-2xl"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500">
                 <span className="text-white font-serif text-xl tracking-wide">{selectedItem.title}</span>
-                <span 
+                <span
                   className="block text-xs uppercase tracking-widest mt-1 transition-colors duration-300"
                   style={{ color: PALETTES[selectedItem.palette].accent }}
                 >
@@ -192,12 +208,12 @@ const Portfolio: React.FC = () => {
   );
 };
 
-const PortfolioItemCard: React.FC<{ 
-  item: PortfolioItem; 
+const PortfolioItemCard: React.FC<{
+  item: PortfolioItem;
   activePalette: string;
   onHover: () => void;
   onLeave: () => void;
-  onClick: () => void; 
+  onClick: () => void;
 }> = ({ item, activePalette, onHover, onLeave, onClick }) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -213,7 +229,7 @@ const PortfolioItemCard: React.FC<{
     >
       <div className={`relative w-full overflow-hidden ${item.aspectRatio}`}>
         <div className={`absolute inset-0 bg-neutral-900 transition-opacity duration-700 ${isLoading ? 'opacity-100' : 'opacity-0'}`} />
-        
+
         <img
           src={item.src}
           alt={item.title}
@@ -224,17 +240,17 @@ const PortfolioItemCard: React.FC<{
             group-hover:grayscale-0 group-hover:scale-[1.03]
           `}
         />
-        
+
         {/* Color Tint Overlay on Hover */}
-        <div 
+        <div
           className="absolute inset-0 transition-colors duration-500 pointer-events-none opacity-0 group-hover:opacity-20 mix-blend-color"
-          style={{ backgroundColor: PALETTES[item.palette].accent }} 
+          style={{ backgroundColor: PALETTES[item.palette].accent }}
         />
-        
+
         <div className="absolute inset-0 bg-neutral-950/20 group-hover:bg-transparent transition-colors duration-500" />
-        
+
         <div className="absolute inset-0 flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-neutral-950/90 to-transparent">
-          <span 
+          <span
             className="text-[10px] uppercase tracking-[0.2em] translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75"
             style={{ color: PALETTES[item.palette].accent }}
           >

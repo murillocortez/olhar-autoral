@@ -5,7 +5,7 @@ import Logo from './Logo';
 
 const Hero: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
-  
+
   // Parallax effect hooks
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -26,28 +26,28 @@ const Hero: React.FC = () => {
 
   return (
     <section ref={ref} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-neutral-950">
-      
+
       {/* Cinematic Background Layer */}
-      <motion.div 
+      <motion.div
         style={{ y: backgroundY }}
         className="absolute inset-0 z-0"
       >
         {/* Image with Cinematic Filters: Low brightness, High Contrast, Slight Desaturation */}
         <img
-          src="https://picsum.photos/seed/atmosphere/1920/1080" 
+          src="/hero-bg.jpg"
           alt="Cinematic Texture"
           className="w-full h-full object-cover filter brightness-[0.45] contrast-[1.15] grayscale-[0.3]"
         />
-        
+
         {/* Requested Gradient: Top (Black) -> Down (Transparent) */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/90 via-neutral-950/20 to-transparent z-10" />
-        
+
         {/* Subtle bottom vignette to ground the section */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-950 to-transparent z-10" />
       </motion.div>
 
       {/* Decorative Brand Element - Big Faded Symbol */}
-      <motion.div 
+      <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-[0.03] pointer-events-none"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 0.03 }}
@@ -57,11 +57,11 @@ const Hero: React.FC = () => {
       </motion.div>
 
       {/* Content Layer */}
-      <motion.div 
+      <motion.div
         style={{ y: textY, opacity: opacityText }}
         className="relative z-20 max-w-screen-2xl mx-auto px-6 text-center flex flex-col items-center justify-center w-full mt-12 md:mt-0"
       >
-        
+
         {/* Subtitle / Artist Name */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 1.2, delay: 0.6 }}
           className="max-w-md md:max-w-2xl text-neutral-300 font-sans font-light text-sm md:text-base tracking-widest uppercase leading-relaxed mb-12 md:mb-16 antialiased"
         >
-          A fotografia como verdade.<br/>Um salto para uma nova essência visual.
+          A fotografia como verdade.<br />Um salto para uma nova essência visual.
         </motion.p>
 
         {/* Minimalist Button */}
