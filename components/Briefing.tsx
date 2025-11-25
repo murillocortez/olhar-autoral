@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check, Send } from 'lucide-react';
 import Logo from './Logo';
+import { supabase } from '../supabaseClient';
 
 interface BriefingProps {
   onBack: () => void;
@@ -21,27 +22,27 @@ interface FieldProps {
 }
 
 // Extracted Component: InputField
-const InputField: React.FC<FieldProps> = ({ 
-  label, 
-  name, 
-  value, 
-  onChange, 
-  focusedField, 
-  setFocusedField, 
-  type = "text", 
-  placeholder = "", 
-  required = true 
+const InputField: React.FC<FieldProps> = ({
+  label,
+  name,
+  value,
+  onChange,
+  focusedField,
+  setFocusedField,
+  type = "text",
+  placeholder = "",
+  required = true
 }) => {
   const hasValue = value && value.length > 0;
   const isActive = focusedField === name || hasValue;
 
   return (
     <div className="relative group mb-10 md:mb-12">
-      <label 
+      <label
         htmlFor={name}
         className={`absolute left-0 transition-all duration-300 pointer-events-none uppercase tracking-[0.2em] font-medium
-          ${isActive 
-            ? '-top-6 text-neutral-300 text-[10px]' 
+          ${isActive
+            ? '-top-6 text-neutral-300 text-[10px]'
             : 'top-3 text-neutral-400 text-sm'}
         `}
       >
@@ -60,7 +61,7 @@ const InputField: React.FC<FieldProps> = ({
         className="w-full bg-transparent border-b border-neutral-700 py-3 text-white font-sans text-lg font-light focus:outline-none focus:border-white transition-colors duration-500 placeholder-neutral-600 autofill:bg-transparent"
       />
       {/* Bottom Glow Line on Focus */}
-      <motion.div 
+      <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: focusedField === name ? 1 : 0 }}
         transition={{ duration: 0.5, ease: "circOut" }}
@@ -71,26 +72,26 @@ const InputField: React.FC<FieldProps> = ({
 };
 
 // Extracted Component: TextAreaField
-const TextAreaField: React.FC<FieldProps> = ({ 
-  label, 
-  name, 
-  value, 
-  onChange, 
-  focusedField, 
-  setFocusedField, 
-  rows = 3, 
-  placeholder = "" 
+const TextAreaField: React.FC<FieldProps> = ({
+  label,
+  name,
+  value,
+  onChange,
+  focusedField,
+  setFocusedField,
+  rows = 3,
+  placeholder = ""
 }) => {
   const hasValue = value && value.length > 0;
   const isActive = focusedField === name || hasValue;
 
   return (
     <div className="relative group mb-12">
-      <label 
+      <label
         htmlFor={name}
         className={`absolute left-0 transition-all duration-300 pointer-events-none uppercase tracking-[0.2em] font-medium
-          ${isActive 
-            ? '-top-6 text-neutral-300 text-[10px]' 
+          ${isActive
+            ? '-top-6 text-neutral-300 text-[10px]'
             : 'top-3 text-neutral-400 text-sm'}
         `}
       >
@@ -107,7 +108,7 @@ const TextAreaField: React.FC<FieldProps> = ({
         onBlur={() => setFocusedField(null)}
         className="w-full bg-transparent border-b border-neutral-700 py-3 text-white font-sans text-lg font-light focus:outline-none focus:border-white transition-colors duration-500 resize-none placeholder-neutral-600 leading-relaxed"
       />
-      <motion.div 
+      <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: focusedField === name ? 1 : 0 }}
         transition={{ duration: 0.5, ease: "circOut" }}
@@ -131,78 +132,63 @@ const Briefing: React.FC<BriefingProps> = ({ onBack }) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const nome = formData.get('nome') as string;
+    const email = formData.get('email') as string;
 
-    // Coleta dos dados
+    // Validação básica
+    if (!nome || !email) {
+      alert("Por favor, preencha o nome e o e-mail.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Coleta dos dados mapeados para a tabela do Supabase
     const data = {
-      nome: formData.get('nome'),
-      profissao: formData.get('profissao'),
-      email: formData.get('email'),
-      telefone: formData.get('telefone'),
-      objetivo: formData.get('objetivo'),
-      descricao: formData.get('descricao'),
-      como_ser_visto: formData.get('como_ser_visto'),
-      referencias: formData.get('referencias'),
+      nome: nome,
+      profissao: formData.get('profissao') as string,
+      email: email,
+      telefone: formData.get('telefone') as string,
+      objetivo: formData.get('objetivo') as string,
+      descricao_fundamento: formData.get('descricao') as string,
+      desejo_fotografico: formData.get('como_ser_visto') as string,
+      referencias: formData.get('referencias') as string,
     };
 
-    // Formatação do corpo do e-mail
-    const subject = `Briefing Personalizado - ${data.nome}`;
-    const body = `
-NOVO BRIEFING RECEBIDO VIA SITE:
+    try {
+      const { error } = await supabase.from('briefings').insert(data);
 
-1. IDENTIDADE
---------------------------------------------------
-Nome: ${data.nome}
-Profissão: ${data.profissao}
-Email: ${data.email}
-Telefone: ${data.telefone}
-
-2. VISÃO & INTENÇÃO
---------------------------------------------------
-Objetivo do Ensaio/Evento:
-${data.objetivo}
-
-Descrição da Intenção Criativa:
-${data.descricao}
-
-Como deseja ser visto:
-${data.como_ser_visto}
-
-3. REFERÊNCIAS
---------------------------------------------------
-Links: ${data.referencias}
-`;
-
-    // Criação do link mailto
-    const mailtoLink = `mailto:murillocortez@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Redirecionamento para o cliente de e-mail
-    window.location.href = mailtoLink;
-
-    // Feedback visual
-    setTimeout(() => {
+      if (error) {
+        console.error('Erro ao enviar briefing:', error);
+        alert("Ocorreu um erro ao enviar o briefing. Por favor, tente novamente.");
+      } else {
+        setIsSent(true);
+      }
+    } catch (err) {
+      console.error('Erro inesperado:', err);
+      alert("Ocorreu um erro inesperado. Por favor, tente novamente.");
+    } finally {
       setIsSubmitting(false);
-      setIsSent(true);
-    }, 1500);
+    }
   };
 
   if (isSent) {
     return (
-      <motion.div 
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-6 text-center"
       >
         <Logo variant="symbol" className="w-16 h-16 text-white mb-8" />
-        <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Redirecionando...</h2>
+        <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Briefing enviado com sucesso.</h2>
         <p className="text-neutral-300 text-lg max-w-md font-light mb-12">
-          Seu cliente de e-mail deve abrir automaticamente com as respostas preenchidas. Caso não abra, por favor, envie manualmente para murillocortez@gmail.com.
+          Obrigado por compartilhar sua visão.
         </p>
-        <button 
+        <button
           onClick={onBack}
           className="uppercase tracking-[0.2em] text-xs text-white border-b border-white/30 pb-1 hover:border-white transition-colors"
         >
@@ -213,16 +199,16 @@ Links: ${data.referencias}
   }
 
   return (
-    <motion.section 
+    <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="min-h-screen bg-neutral-950 text-neutral-100 pt-24 pb-32 px-6 md:px-12"
     >
       <div className="max-w-3xl mx-auto">
-        
+
         {/* Nav Back */}
-        <button 
+        <button
           onClick={onBack}
           className="group flex items-center gap-3 text-neutral-400 hover:text-white transition-colors mb-16"
         >
@@ -248,7 +234,7 @@ Links: ${data.referencias}
         </div>
 
         {/* Form */}
-        <motion.form 
+        <motion.form
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -259,17 +245,17 @@ Links: ${data.referencias}
           <div className="space-y-4">
             <span className="text-xs uppercase tracking-widest text-neutral-500 block mb-8 font-semibold">01. Identidade</span>
             <div className="grid md:grid-cols-2 gap-x-12 gap-y-4">
-              <InputField 
-                label="Nome Completo" 
-                name="nome" 
+              <InputField
+                label="Nome Completo"
+                name="nome"
                 value={formValues['nome'] || ''}
                 onChange={handleInputChange}
                 focusedField={focusedField}
                 setFocusedField={setFocusedField}
               />
-              <InputField 
-                label="Profissão / Cargo" 
-                name="profissao" 
+              <InputField
+                label="Profissão / Cargo"
+                name="profissao"
                 required={false}
                 value={formValues['profissao'] || ''}
                 onChange={handleInputChange}
@@ -278,18 +264,18 @@ Links: ${data.referencias}
               />
             </div>
             <div className="grid md:grid-cols-2 gap-x-12 gap-y-4">
-              <InputField 
-                label="E-mail" 
-                name="email" 
-                type="email" 
+              <InputField
+                label="E-mail"
+                name="email"
+                type="email"
                 value={formValues['email'] || ''}
                 onChange={handleInputChange}
                 focusedField={focusedField}
                 setFocusedField={setFocusedField}
               />
-              <InputField 
-                label="Telefone / WhatsApp" 
-                name="telefone" 
+              <InputField
+                label="Telefone / WhatsApp"
+                name="telefone"
                 type="tel"
                 value={formValues['telefone'] || ''}
                 onChange={handleInputChange}
@@ -301,49 +287,49 @@ Links: ${data.referencias}
 
           {/* Section: Vision */}
           <div className="space-y-4 pt-8 border-t border-neutral-800">
-             <span className="text-xs uppercase tracking-widest text-neutral-500 block mb-8 font-semibold">02. Visão & Intenção</span>
-             
-             <InputField 
-                label="Objetivo do Ensaio / Evento" 
-                name="objetivo" 
-                placeholder="Ex: Reposicionamento de marca, registro de show..." 
-                value={formValues['objetivo'] || ''}
-                onChange={handleInputChange}
-                focusedField={focusedField}
-                setFocusedField={setFocusedField}
-             />
-             
-             <TextAreaField 
-                label="Descrição da Intenção Criativa" 
-                name="descricao" 
-                rows={4}
-                placeholder="Qual atmosfera você imagina? Que sentimentos queremos despertar?" 
-                value={formValues['descricao'] || ''}
-                onChange={handleInputChange}
-                focusedField={focusedField}
-                setFocusedField={setFocusedField}
-             />
+            <span className="text-xs uppercase tracking-widest text-neutral-500 block mb-8 font-semibold">02. Visão & Intenção</span>
 
-             <TextAreaField 
-                label="Como você deseja ser visto na fotografia?" 
-                name="como_ser_visto" 
-                rows={2}
-                placeholder="Ex: Forte, vulnerável, autêntico, misterioso..." 
-                value={formValues['como_ser_visto'] || ''}
-                onChange={handleInputChange}
-                focusedField={focusedField}
-                setFocusedField={setFocusedField}
-             />
+            <InputField
+              label="Objetivo do Ensaio / Evento"
+              name="objetivo"
+              placeholder="Ex: Reposicionamento de marca, registro de show..."
+              value={formValues['objetivo'] || ''}
+              onChange={handleInputChange}
+              focusedField={focusedField}
+              setFocusedField={setFocusedField}
+            />
+
+            <TextAreaField
+              label="Descrição da Intenção Criativa"
+              name="descricao"
+              rows={4}
+              placeholder="Qual atmosfera você imagina? Que sentimentos queremos despertar?"
+              value={formValues['descricao'] || ''}
+              onChange={handleInputChange}
+              focusedField={focusedField}
+              setFocusedField={setFocusedField}
+            />
+
+            <TextAreaField
+              label="Como você deseja ser visto na fotografia?"
+              name="como_ser_visto"
+              rows={2}
+              placeholder="Ex: Forte, vulnerável, autêntico, misterioso..."
+              value={formValues['como_ser_visto'] || ''}
+              onChange={handleInputChange}
+              focusedField={focusedField}
+              setFocusedField={setFocusedField}
+            />
           </div>
 
           {/* Section: References */}
           <div className="space-y-4 pt-8 border-t border-neutral-800">
             <span className="text-xs uppercase tracking-widest text-neutral-500 block mb-8 font-semibold">03. Referências</span>
-            <InputField 
-              label="Link para Referências Visuais" 
-              name="referencias" 
-              required={false} 
-              placeholder="Pinterest, Drive, Instagram ou Site" 
+            <InputField
+              label="Link para Referências Visuais"
+              name="referencias"
+              required={false}
+              placeholder="Pinterest, Drive, Instagram ou Site"
               value={formValues['referencias'] || ''}
               onChange={handleInputChange}
               focusedField={focusedField}
