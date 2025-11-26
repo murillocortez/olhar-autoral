@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
       >
         {/* Image with Cinematic Filters: Low brightness, High Contrast, Slight Desaturation */}
         <img
-          src="/hero-bg.jpg"
+          src="https://i.ibb.co/p6q1L7Kb/IMG-2547.jpg"
           alt="Cinematic Texture"
           className="w-full h-full object-cover filter brightness-[0.45] contrast-[1.15] grayscale-[0.3]"
         />

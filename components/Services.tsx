@@ -6,7 +6,7 @@ const services = [
     symbol: "✦",
     title: "Shows e Eventos",
     description: "Cenas que acontecem uma vez. Meu trabalho é fazer com que elas durem para sempre — com estética, técnica e intensidade.",
-    image: "/shows-eventos.jpg"
+    image: "https://i.ibb.co/MyQnh0tB/IMG-0549.jpg"
   },
   {
     symbol: "●",

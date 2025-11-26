@@ -42,8 +42,8 @@ const InputField: React.FC<FieldProps> = ({
         htmlFor={name}
         className={`absolute left-0 transition-all duration-300 pointer-events-none uppercase tracking-[0.2em] font-medium
           ${isActive
-            ? '-top-6 text-neutral-300 text-[10px]'
-            : 'top-3 text-neutral-400 text-sm'}
+            ? '-top-6 text-neutral-500 dark:text-neutral-300 text-[10px]'
+            : 'top-3 text-neutral-600 dark:text-neutral-400 text-sm'}
         `}
       >
         {label} {required && <span className="text-neutral-500">*</span>}
@@ -58,14 +58,14 @@ const InputField: React.FC<FieldProps> = ({
         placeholder={focusedField === name ? placeholder : ""}
         onFocus={() => setFocusedField(name)}
         onBlur={() => setFocusedField(null)}
-        className="w-full bg-transparent border-b border-neutral-700 py-3 text-white font-sans text-lg font-light focus:outline-none focus:border-white transition-colors duration-500 placeholder-neutral-600 autofill:bg-transparent"
+        className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 py-3 text-neutral-900 dark:text-white font-sans text-lg font-light focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors duration-500 placeholder-neutral-400 dark:placeholder-neutral-600 autofill:bg-transparent"
       />
       {/* Bottom Glow Line on Focus */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: focusedField === name ? 1 : 0 }}
         transition={{ duration: 0.5, ease: "circOut" }}
-        className="absolute bottom-0 left-0 w-full h-[1px] bg-white origin-left"
+        className="absolute bottom-0 left-0 w-full h-[1px] bg-neutral-900 dark:bg-white origin-left"
       />
     </div>
   );
@@ -91,8 +91,8 @@ const TextAreaField: React.FC<FieldProps> = ({
         htmlFor={name}
         className={`absolute left-0 transition-all duration-300 pointer-events-none uppercase tracking-[0.2em] font-medium
           ${isActive
-            ? '-top-6 text-neutral-300 text-[10px]'
-            : 'top-3 text-neutral-400 text-sm'}
+            ? '-top-6 text-neutral-500 dark:text-neutral-300 text-[10px]'
+            : 'top-3 text-neutral-600 dark:text-neutral-400 text-sm'}
         `}
       >
         {label}
@@ -106,13 +106,13 @@ const TextAreaField: React.FC<FieldProps> = ({
         placeholder={focusedField === name ? placeholder : ""}
         onFocus={() => setFocusedField(name)}
         onBlur={() => setFocusedField(null)}
-        className="w-full bg-transparent border-b border-neutral-700 py-3 text-white font-sans text-lg font-light focus:outline-none focus:border-white transition-colors duration-500 resize-none placeholder-neutral-600 leading-relaxed"
+        className="w-full bg-transparent border-b border-neutral-300 dark:border-neutral-700 py-3 text-neutral-900 dark:text-white font-sans text-lg font-light focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors duration-500 resize-none placeholder-neutral-400 dark:placeholder-neutral-600 leading-relaxed"
       />
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: focusedField === name ? 1 : 0 }}
         transition={{ duration: 0.5, ease: "circOut" }}
-        className="absolute bottom-0 left-0 w-full h-[1px] bg-white origin-left"
+        className="absolute bottom-0 left-0 w-full h-[1px] bg-neutral-900 dark:bg-white origin-left"
       />
     </div>
   );
@@ -212,14 +212,14 @@ const Briefing: React.FC<BriefingProps> = ({ onBack }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-neutral-950 text-neutral-100 pt-24 pb-32 px-6 md:px-12"
+      className="min-h-screen bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 pt-24 pb-32 px-6 md:px-12 transition-colors duration-500"
     >
       <div className="max-w-3xl mx-auto">
 
         {/* Nav Back */}
         <button
           onClick={onBack}
-          className="group flex items-center gap-3 text-neutral-400 hover:text-white transition-colors mb-16"
+          className="group flex items-center gap-3 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors mb-16"
         >
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
           <span className="uppercase tracking-[0.2em] text-xs">Voltar</span>
@@ -232,11 +232,11 @@ const Briefing: React.FC<BriefingProps> = ({ onBack }) => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <Logo variant="symbol" className="w-14 h-14 mx-auto text-neutral-700 mb-8" />
-            <h1 className="font-serif text-4xl md:text-6xl text-white mb-6">
+            <Logo variant="symbol" className="w-14 h-14 mx-auto text-neutral-800 dark:text-neutral-700 mb-8 transition-colors duration-500" />
+            <h1 className="font-serif text-4xl md:text-6xl text-neutral-900 dark:text-white mb-6 transition-colors duration-500">
               Briefing Personalizado
             </h1>
-            <p className="text-neutral-300 font-light text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
+            <p className="text-neutral-600 dark:text-neutral-300 font-light text-lg md:text-xl max-w-lg mx-auto leading-relaxed transition-colors duration-500">
               Me conte sobre você e sobre o que deseja criar.
             </p>
           </motion.div>
@@ -295,7 +295,7 @@ const Briefing: React.FC<BriefingProps> = ({ onBack }) => {
           </div>
 
           {/* Section: Vision */}
-          <div className="space-y-4 pt-8 border-t border-neutral-800">
+          <div className="space-y-4 pt-8 border-t border-neutral-300 dark:border-neutral-800 transition-colors duration-500">
             <span className="text-xs uppercase tracking-widest text-neutral-500 block mb-8 font-semibold">02. Visão & Intenção</span>
 
             <InputField
@@ -332,7 +332,7 @@ const Briefing: React.FC<BriefingProps> = ({ onBack }) => {
           </div>
 
           {/* Section: References */}
-          <div className="space-y-4 pt-8 border-t border-neutral-800">
+          <div className="space-y-4 pt-8 border-t border-neutral-300 dark:border-neutral-800 transition-colors duration-500">
             <span className="text-xs uppercase tracking-widest text-neutral-500 block mb-8 font-semibold">03. Referências</span>
             <InputField
               label="Link para Referências Visuais"
@@ -354,14 +354,14 @@ const Briefing: React.FC<BriefingProps> = ({ onBack }) => {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.8)" }}
+              whileHover={{ scale: 1.02, borderColor: "rgba(163,163,163,0.8)" }}
               whileTap={{ scale: 0.98 }}
-              className="group relative inline-flex items-center gap-4 px-12 py-5 border border-neutral-700 bg-neutral-900 hover:bg-neutral-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative inline-flex items-center gap-4 px-12 py-5 border border-neutral-300 dark:border-neutral-700 bg-neutral-200 dark:bg-neutral-900 hover:bg-neutral-300 dark:hover:bg-neutral-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="uppercase tracking-[0.25em] text-sm text-neutral-300 group-hover:text-white transition-colors font-medium">
+              <span className="uppercase tracking-[0.25em] text-sm text-neutral-600 dark:text-neutral-300 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors font-medium">
                 {isSubmitting ? 'Preparando...' : 'Enviar Briefing'}
               </span>
-              {!isSubmitting && <Send size={16} className="text-neutral-400 group-hover:text-white transition-colors" />}
+              {!isSubmitting && <Send size={16} className="text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors" />}
             </motion.button>
           </div>
         </motion.form>

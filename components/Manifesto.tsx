@@ -9,7 +9,7 @@ interface ManifestoProps {
 }
 
 const Manifesto: React.FC<ManifestoProps> = ({ theme, text, alignment = 'center' }) => {
-  
+
   const getIcon = () => {
     switch (theme) {
       case 'light': return <Sparkles size={14} strokeWidth={1} />;
@@ -31,12 +31,12 @@ const Manifesto: React.FC<ManifestoProps> = ({ theme, text, alignment = 'center'
     }
   };
 
-  const alignClass = alignment === 'center' ? 'items-center text-center' : 
-                     alignment === 'right' ? 'items-end text-right' : 'items-start text-left';
+  const alignClass = alignment === 'center' ? 'items-center text-center' :
+    alignment === 'right' ? 'items-end text-right' : 'items-start text-left';
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-neutral-950 flex flex-col justify-center overflow-hidden">
-      <motion.div 
+    <section className="py-24 md:py-32 px-6 bg-neutral-50 dark:bg-neutral-950 flex flex-col justify-center overflow-hidden transition-colors duration-500">
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -45,16 +45,16 @@ const Manifesto: React.FC<ManifestoProps> = ({ theme, text, alignment = 'center'
       >
         {/* Minimalist Label with Icon */}
         <div className="flex items-center gap-3 text-neutral-500 opacity-60">
-          <div className="h-px w-8 bg-neutral-700" />
+          <div className="h-px w-8 bg-neutral-300 dark:bg-neutral-700 transition-colors duration-500" />
           <span className="text-[9px] uppercase tracking-[0.3em] flex items-center gap-2">
             {getIcon()}
             {getLabel()}
           </span>
-          <div className="h-px w-8 bg-neutral-700" />
+          <div className="h-px w-8 bg-neutral-300 dark:bg-neutral-700 transition-colors duration-500" />
         </div>
 
         {/* The Manifesto Text */}
-        <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-neutral-200 leading-relaxed font-light italic">
+        <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-neutral-800 dark:text-neutral-200 leading-relaxed font-light italic transition-colors duration-500">
           "{text}"
         </h3>
 
