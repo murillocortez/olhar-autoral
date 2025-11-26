@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import Logo from './Logo';
+import SupabaseImg from './SupabaseImg';
 
 const About: React.FC = () => {
   return (
@@ -21,8 +23,11 @@ const About: React.FC = () => {
             className="relative order-2 lg:order-1"
           >
             <div className="relative aspect-[3/4] overflow-hidden rounded-sm">
-              <img
+              <SupabaseImg
                 src="https://i.ibb.co/jvMh24Qy/CORT6691editada.jpg"
+                category="site"
+                filename="CORT6691editada.jpg"
+                fallbackSrc="https://i.ibb.co/jvMh24Qy/CORT6691editada.jpg"
                 alt="Murillo Cortez Portrait"
                 className="w-full h-full object-cover object-top filter grayscale contrast-110 hover:grayscale-0 transition-all duration-1000 ease-in-out"
               />

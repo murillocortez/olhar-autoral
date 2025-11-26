@@ -1,7 +1,9 @@
+
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import Logo from './Logo';
+import SupabaseImg from './SupabaseImg';
 
 const Hero: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
@@ -33,8 +35,11 @@ const Hero: React.FC = () => {
         className="absolute inset-0 z-0"
       >
         {/* Image with Cinematic Filters: Low brightness, High Contrast, Slight Desaturation */}
-        <img
+        <SupabaseImg
           src="https://i.ibb.co/p6q1L7Kb/IMG-2547.jpg"
+          category="Shows"
+          filename="IMG-2547.jpg"
+          fallbackSrc="https://i.ibb.co/p6q1L7Kb/IMG-2547.jpg"
           alt="Cinematic Texture"
           className="w-full h-full object-cover filter brightness-[0.45] contrast-[1.15] grayscale-[0.3]"
         />

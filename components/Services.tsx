@@ -1,30 +1,36 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
+import SupabaseImg from './SupabaseImg';
 
 const services = [
   {
     symbol: "✦",
     title: "Shows e Eventos",
     description: "Cenas que acontecem uma vez. Meu trabalho é fazer com que elas durem para sempre — com estética, técnica e intensidade.",
-    image: "https://i.ibb.co/MyQnh0tB/IMG-0549.jpg"
+    image: "https://i.ibb.co/MyQnh0tB/IMG-0549.jpg",
+    supabaseCategory: "Shows"
   },
   {
     symbol: "●",
     title: "Gastronomia",
     description: "Food styling com intenção. Luz, textura e atmosfera que fazem o público sentir o sabor antes mesmo de provar.",
-    image: "https://picsum.photos/600/800?random=2"
+    image: "https://picsum.photos/600/800?random=2",
+    supabaseCategory: "gastronomia"
   },
   {
     symbol: "■",
     title: "Retratos Autênticos",
     description: "Não é apenas um retrato — é um encontro. Entre quem você é e como o mundo vai te ver.",
-    image: "https://picsum.photos/600/800?random=3"
+    image: "https://picsum.photos/600/800?random=3",
+    supabaseCategory: "retratos"
   },
   {
     symbol: "▲",
     title: "Projetos Autoriais",
     description: "A minha assinatura mais pura. Ideias, conceitos e visões que florescem em forma de fotografia.",
-    image: "https://picsum.photos/600/800?random=4"
+    image: "https://picsum.photos/600/800?random=4",
+    supabaseCategory: "projeto_social"
   }
 ];
 
@@ -59,10 +65,11 @@ const Services: React.FC = () => {
               {/* Image Container */}
               <div className="relative w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-8 border border-neutral-900 group-hover:border-neutral-800 transition-colors duration-500">
                 <div className="absolute inset-0 bg-neutral-800 animate-pulse" /> {/* Placeholder loading skeleton */}
-                <img
+                <SupabaseImg
                   src={service.image}
+                  category={service.supabaseCategory}
+                  fallbackSrc={service.image}
                   alt={service.title}
-                  loading="lazy"
                   className="relative z-10 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:saturate-100 grayscale opacity-90 group-hover:opacity-100"
                 />
                 {/* Subtle overlay that lifts on hover */}
