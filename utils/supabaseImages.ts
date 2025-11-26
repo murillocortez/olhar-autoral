@@ -16,7 +16,8 @@ const CATEGORY_FOLDER_MAP: Record<string, string> = {
     'projetos autorais': 'projeto_social', // Mapping "Projetos Autorais" to "projeto_social" as requested/inferred
     'servicos': 'Services',
     'site': 'site',
-    'autorais': 'projeto_social' // Fallback
+    'autorais': 'projeto_social', // Fallback
+    'services/shows e eventos': 'Services/Shows e Eventos' // Explicit mapping
 };
 
 export const loadImagesFromSupabase = async (): Promise<SupabaseImage[]> => {
@@ -41,6 +42,8 @@ export const loadImagesFromSupabase = async (): Promise<SupabaseImage[]> => {
             console.error(`Error loading images from folder ${folder}:`, error);
             continue;
         }
+
+        console.log(`Folder: ${folder}, Items found: ${data ? data.length : 0}`);
 
         if (data) {
             const folderImages = data

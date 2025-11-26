@@ -35,15 +35,16 @@ const Hero: React.FC = () => {
         className="absolute inset-0 z-0"
       >
         {/* Image with Cinematic Filters: Low brightness, High Contrast, Slight Desaturation */}
-        <SupabaseImg
-          src="https://i.ibb.co/p6q1L7Kb/IMG-2547.jpg"
-          category="Shows"
-          filename="IMG-2547.jpg"
-          fallbackSrc="https://i.ibb.co/p6q1L7Kb/IMG-2547.jpg"
-          alt="Cinematic Texture"
-          className="w-full h-full object-cover filter brightness-[0.45] contrast-[1.15] grayscale-[0.3]"
-        />
-
+        <div className="absolute inset-0 z-0">
+          <SupabaseImg
+            src="https://ouuxwiidjksjewsdzspu.supabase.co/storage/v1/object/public/fotos/site/IMG_2547.jpg"
+            category="site"
+            filename="IMG_2547.jpg"
+            fallbackSrc="https://ouuxwiidjksjewsdzspu.supabase.co/storage/v1/object/public/fotos/site/IMG_2547.jpg"
+            alt="Cinematic Texture"
+            className="w-full h-full object-cover filter brightness-[0.45] contrast-[1.15] grayscale-[0.3]"
+          />
+        </div>
         {/* Requested Gradient: Top (Black) -> Down (Transparent) */}
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/90 via-neutral-950/20 to-transparent z-10" />
 

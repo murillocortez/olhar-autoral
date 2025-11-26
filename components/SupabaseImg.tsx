@@ -22,6 +22,9 @@ const SupabaseImg: React.FC<SupabaseImgProps> = ({
     useEffect(() => {
         if (!loading) {
             const url = getImage(category, filename);
+            if (category === "Services/Shows e Eventos") {
+                console.log(`SupabaseImg Debug: Category="${category}", URL="${url}"`);
+            }
             if (url) {
                 setImgSrc(url);
             } else if (fallbackSrc) {
@@ -48,6 +51,7 @@ const SupabaseImg: React.FC<SupabaseImgProps> = ({
                 className={className}
                 {...props}
                 onError={(e) => {
+                    console.error("Image load error for:", imgSrc);
                     e.currentTarget.style.display = 'none';
                     e.currentTarget.parentElement?.classList.add('bg-neutral-200', 'dark:bg-neutral-800');
                 }}
