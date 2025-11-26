@@ -24,10 +24,10 @@ const About: React.FC = () => {
           >
             <div className="relative aspect-[3/4] overflow-hidden rounded-sm">
               <SupabaseImg
-                src="https://i.ibb.co/jvMh24Qy/CORT6691editada.jpg"
+                src="https://ouuxwiidjksjewsdzspu.supabase.co/storage/v1/object/public/fotos/site/CORT6691editada.jpg"
                 category="site"
                 filename="CORT6691editada.jpg"
-                fallbackSrc="https://i.ibb.co/jvMh24Qy/CORT6691editada.jpg"
+                fallbackSrc="https://ouuxwiidjksjewsdzspu.supabase.co/storage/v1/object/public/fotos/site/CORT6691editada.jpg"
                 alt="Murillo Cortez Portrait"
                 className="w-full h-full object-cover object-top filter grayscale contrast-110 hover:grayscale-0 transition-all duration-1000 ease-in-out"
               />

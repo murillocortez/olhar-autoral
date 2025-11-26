@@ -20,7 +20,15 @@ const CATEGORY_FOLDER_MAP: Record<string, string> = {
 };
 
 export const loadImagesFromSupabase = async (): Promise<SupabaseImage[]> => {
-    const folders = ['Shows', 'gastronomia', 'retratos', 'projeto_social', 'Services', 'site'];
+    const folders = [
+        'Shows',
+        'gastronomia',
+        'retratos',
+        'projeto_social',
+        'Services',
+        'site',
+        'Services/Shows e Eventos' // Added specific subfolder
+    ];
     let allImages: SupabaseImage[] = [];
 
     for (const folder of folders) {

@@ -8,8 +8,8 @@ const services = [
     symbol: "✦",
     title: "Shows e Eventos",
     description: "Cenas que acontecem uma vez. Meu trabalho é fazer com que elas durem para sempre — com estética, técnica e intensidade.",
-    image: "https://i.ibb.co/MyQnh0tB/IMG-0549.jpg",
-    supabaseCategory: "Shows"
+    image: "", // Using Supabase category
+    supabaseCategory: "Services/Shows e Eventos"
   },
   {
     symbol: "●",
